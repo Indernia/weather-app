@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  background-color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  gap: 1rem;
+}
+
+.cards > *{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem;
+  background-color: #f0f0f0; /* Light grey background */
+  box-shadow: 8px 8px 16px #d1d1d1, /* Darker shadow on one side */
+              -8px -8px 16px #ffffff; /* Lighter shadow on the other side */
+  width: 90%;
+  height: auto;
+  border-radius: .3rem;
+  background-color: rgba(0, 0, 0, .1);
+}
+
