@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
+import './WeatherWidget.css';
 
-function WeatherWidget( { city, country}) {
+function WeatherWidget( { city, country, removeLocation, index }) {
     const [weather, setWeather] = useState(null);
 
     useEffect(() => {
@@ -14,28 +15,28 @@ function WeatherWidget( { city, country}) {
         return <div>Loading...</div>;
     }
 
-    const tempInCelsius = weather.main.temp - 273.15;
     let conditions = null;
     let windSpeed = null;
-    let windDirection = null;
+    let tempInCelsius = null;
     try {
         windSpeed = weather.wind.speed;
-        windDirection = weather.wind.deg;
-    } catch (error) {
-        console.log(error);
-    }
-    try {
         conditions = weather.weather[0].description;
+        tempInCelsius = weather.main.temp - 273.15;
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        removeLocation(index);  
+        return null;
     }
 
     return (
-        <div>
-            <h3>Weather in {weather.name}</h3>
-            <h4>Temperature is: {tempInCelsius.toFixed(2)}°C</h4>
-            <h4>Conditions are: {conditions}</h4>
-            <h5>Wind speed is: {windSpeed}m/s</h5>
+        <div className='weatherContainer'>
+            <button className='removeItemButton' onClick={(index) => removeLocation(index)}>X</button>
+            <div className='weatherInformation'>
+                <h3>{weather.name}</h3>
+                <h4>Temperature is: {tempInCelsius.toFixed(0)}°C</h4>
+                <h4>Conditions are: {conditions}</h4>
+                <h5>Wind speed is: {windSpeed}m/s</h5>
+            </div>
         </div>
     );
 }

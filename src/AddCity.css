@@ -1,0 +1,13 @@
+.cityInput {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 30%;
+}
+
+.cityInput button{
+    width: 30%;
+    
+}

@@ -1,0 +1,16 @@
+.removeItemButton {
+    margin-left: auto;
+}
+
+.weatherContainer {
+    display: flex;
+    flex-direction:column;
+}
+
+.weatherInformation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
