@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 import AddCity from './AddCity';
 import CurrentWeather from './CurrentWeather';
 import HourlyForecast from './HourlyForecast';
+import DailyForecast from './DailyForecast';
+import Footer from './Footer';
 
 function App() {
   const [data, setData] = useState();
@@ -49,9 +51,12 @@ function App() {
     )
   }
   return (
-    <div>
+    <div className='mainContainer'>
+      <img src="cloud.svg" alt="cloud"></img>
       <CurrentWeather currentData={data.current} dailyData={data.daily}/>
       <HourlyForecast hourlyData={data.hourly}/>
+      <DailyForecast dailyData={data.daily}/>
+      <Footer/>
     </div>  
     )
 }

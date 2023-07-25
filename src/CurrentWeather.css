@@ -6,15 +6,28 @@
     margin: 0 auto;
     width: 50%;
     height: 100%;
-    background-color: #fff;
+    background-color: rgba(0,0,0,0);
+    color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 500;
-    color: #333;
     font-size: 1.2rem;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.currentWeatherContainer h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 1rem;
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
     line-height: 1.5;
     letter-spacing: 1px;
     text-transform: capitalize;
