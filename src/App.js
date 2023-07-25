@@ -1,31 +1,32 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
-import WeatherWidget from './WeatherWidget';
 import AddCity from './AddCity';
+import CurrentWeather from './CurrentWeather';
+import HourlyForecast from './HourlyForecast';
 
 function App() {
-  const [locations, setLocations] = useState([]);
-  const [coordinates, setCoordinates] = useState({lat: null, lon: null});
-
-  useEffect(() => {
-    const storedLocations = JSON.parse(localStorage.getItem("Locations"));
-    if (storedLocations) {
-      setLocations(storedLocations);
+  const [data, setData] = useState();
+  const [coordinates, setCoordinates] = useState({ lat: null, lon: null});
+  
+  useEffect( () => {
+    if (coordinates.lat === null) {
+      getLocation();
     }
+    console.log(coordinates);
   }, []);
-
-  const addLocation = (country, city) => {
-    const newLocations = [...locations, {city: city, country: country}];
-    setLocations(newLocations);
-    localStorage.setItem("Locations", JSON.stringify(newLocations));
-  }
-
-  const removeLocation = (index) => {
-    const newLocations = [...locations];
-    newLocations.splice(index, 1);
-    setLocations(newLocations);
-    localStorage.setItem("Locations", JSON.stringify(newLocations));
-  }
+  
+  useEffect(() => { 
+    const fetchData = async () => {
+        const responseData = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`);
+        const data = await responseData.json();
+        console.log(data);
+        setData(data);
+    }
+    if (coordinates.lat !== null){
+      console.log(coordinates);
+      fetchData();
+    }
+  }, [coordinates]);
 
   const getLocation = () => {
     if(!navigator.geolocation){
@@ -39,19 +40,20 @@ function App() {
     })
     console.log(coordinates);
   }
-  if (coordinates.lat === null) {
-    getLocation();
+  if (!data){
+    console.log("loading data");
+    return (
+      <div> 
+        loading...
+      </div>
+    )
   }
   return (
     <div>
-      <h1>Hello Weather</h1>
-      <div className='cards'>
-        {coordinates.lat === null ? <h2>Loading...</h2> : 
-          <WeatherWidget key={1} index={1} coordinates={coordinates} removeLocation={() => removeLocation(1)}/>
-        }
-      </div>
+      <CurrentWeather currentData={data.current} dailyData={data.daily}/>
+      <HourlyForecast hourlyData={data.hourly}/>
     </div>  
-    );
+    )
 }
 
 export default App;
