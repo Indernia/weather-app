@@ -1,15 +1,18 @@
 import React, { useState, useEffect} from 'react';
 import './WeatherWidget.css';
+import Forecast from './Forecast.js';
 
-function WeatherWidget( { city, country, removeLocation, index }) {
+function WeatherWidget( { city, country, removeLocation, index, coordinates }) {
     const [weather, setWeather] = useState(null);
+
 
     useEffect(() => {
         console.log(`Weather Widget Mounted`);
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`).
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`).
         then(response => response.json()).
         then(data => {setWeather(data); console.log(data)});
     }, []);
+
 
     if (!weather) {
         return <div>Loading...</div>;
@@ -37,6 +40,7 @@ function WeatherWidget( { city, country, removeLocation, index }) {
                 <h4>Conditions are: {conditions}</h4>
                 <h5>Wind speed is: {windSpeed}m/s</h5>
             </div>
+            <Forecast coordinates={coordinates} />
         </div>
     );
 }

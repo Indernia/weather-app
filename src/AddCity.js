@@ -21,7 +21,7 @@ function AddCity({ addLocation }) {
             <label>City</label>
             <input type="text" value={city} onChange={(e) => setcity(e.target.value)} placeholder="Please input the desired city" />
             <label>Country</label>
-            <input type="text" value={country} onChange={(e) => setcountry(e.target.value)}  placeholder="please input just country code"/>
+            <input type="text" value={country} onChange={(e) => setcountry(e.target.value)}  placeholder="please input just country code, ex. dk for Denmark"/>
             <button type="submit" >Add Location</button>
         </form>
     )
